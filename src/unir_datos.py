@@ -1,17 +1,27 @@
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 
-ruta = Path("../data/raw")
+CARPETA = Path("data/interim")
+SALIDA = Path("data/processed")
+SALIDA.mkdir(exist_ok=True)
+
+archivos = sorted(CARPETA.glob("*.csv"))
 dfs = []
 
-for archivo in ruta.glob("*.xls"):
-    df = pd.read_excel(archivo)
-    df["departamento"] = archivo.stem
-    dfs.append(df)
-
-datos = pd.concat(dfs, ignore_index=True)
-datos.to_csv(
-    "../data/interim/establecimientos_unidos.csv",
-    index=False
+for archivo in archivos:
+    print(f"Leyendo {archivo.name}")
+    dfs.append(pd.read_csv(archivo))
+df = pd.concat(
+    dfs,
+    ignore_index=True
 )
-print(datos.shape)
+
+print(f"\nTotal de registros: {len(df):,}")
+
+df.to_csv(
+    SALIDA / "centros_educativos_gt.csv",
+    index=False,
+    encoding="utf-8-sig"
+)
+
+print("Archivo final creado.")
