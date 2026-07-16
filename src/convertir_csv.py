@@ -21,7 +21,6 @@ COLUMNAS_ESPERADAS = {"CODIGO", "DISTRITO", "DEPARTAMENTO", "MUNICIPIO", "ESTABL
 for archivo in archivos:
     print(f"Convirtiendo {archivo.name}...")
     try:
-        # encoding='windows-1252' evita que se corrompan tildes y ñ
         tablas = pd.read_html(archivo, encoding="windows-1252")
 
         df_correcto = None
@@ -32,10 +31,8 @@ for archivo in archivos:
                 break
 
         if df_correcto is None:
-            # Respaldo: la tabla con más celdas (filas x columnas)
             df_correcto = max(tablas, key=lambda t: t.shape[0] * t.shape[1])
 
-        # Quitar filas completamente vacías (la fila de "relleno" final)
         df_correcto = df_correcto.dropna(how="all")
 
         nombre_csv = archivo.stem + ".csv"
