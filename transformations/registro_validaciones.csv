@@ -1,0 +1,39 @@
+Prueba,Criterio,Resultado,Registros_afectados,Detalle
+Duplicados exactos (fila completa),df.duplicated().sum() == 0,PASA,0,0 filas completamente duplicadas encontradas.
+CODIGO único,df['CODIGO'].duplicated().sum() == 0,PASA,0,0 valores de CODIGO repetidos encontrados.
+Espacios al inicio/final o múltiples,Ninguna columna de texto con valores != valor.strip() ni espacios dobles internos,PASA,0,Sin celdas con espacios sobrantes.
+Formato de TELEFONO,"TELEFONO coincide con ^\d{7,8}$ o es NA",PASA,0,Todos los valores no nulos tienen 7 u 8 dígitos.
+Formato de TELEFONO_ADICIONAL,"Cada número separado por ';' coincide con ^\d{7,8}$",PASA,0,Todos los valores no nulos tienen 7 u 8 dígitos por número.
+DEPARTAMENTO en catálogo oficial (22 departamentos),DEPARTAMENTO.isin(CATALOGO_DEPARTAMENTOS) para todas las filas,PASA,0,Todos los DEPARTAMENTO pertenecen al catálogo oficial.
+MUNICIPIO — validación de formato (respaldo),"MUNICIPIO no contiene dígitos (proxy, no sustituye el catálogo oficial)",PASA,0,NOTA: no se encontró ../data/reference/municipios_gt.csv; no fue posible validar MUNICIPIO contra el catálogo oficial de 340 municipios. Se aplicó solo una validación de formato como respaldo. 0 valores con dígitos encontrados.
+Formato de CODIGO,CODIGO coincide con ^\d{2}-\d{2}-\d{4}-\d{2}$,PASA,0,Todos los CODIGO cumplen el formato esperado.
+Dominio acotado de NIVEL,NIVEL tiene un número reducido y estable de categorías (variable categórica),PASA,0,NIVEL tiene 1 categorías únicas: ['DIVERSIFICADO']
+Dominio acotado de SECTOR,SECTOR tiene un número reducido y estable de categorías (variable categórica),PASA,0,"SECTOR tiene 4 categorías únicas: ['COOPERATIVA', 'MUNICIPAL', 'OFICIAL', 'PRIVADO']"
+Dominio acotado de AREA,AREA tiene un número reducido y estable de categorías (variable categórica),PASA,0,"AREA tiene 3 categorías únicas: ['RURAL', 'SIN ESPECIFICAR', 'URBANA']"
+Dominio acotado de STATUS,STATUS tiene un número reducido y estable de categorías (variable categórica),PASA,0,"STATUS tiene 5 categorías únicas: ['ABIERTA', 'CERRADA DEFINITIVAMENTE', 'CERRADA TEMPORALMENTE', 'TEMPORAL NOMBRAMIENTO', 'TEMPORAL TITULOS']"
+Dominio acotado de MODALIDAD,MODALIDAD tiene un número reducido y estable de categorías (variable categórica),PASA,0,"MODALIDAD tiene 2 categorías únicas: ['BILINGUE', 'MONOLINGUE']"
+Dominio acotado de JORNADA,JORNADA tiene un número reducido y estable de categorías (variable categórica),PASA,0,"JORNADA tiene 6 categorías únicas: ['DOBLE', 'INTERMEDIA', 'MATUTINA', 'NOCTURNA', 'SIN JORNADA', 'VESPERTINA']"
+Dominio acotado de PLAN,PLAN tiene un número reducido y estable de categorías (variable categórica),PASA,0,"PLAN tiene 13 categorías únicas: ['A DISTANCIA', 'DIARIO(REGULAR)', 'DOMINICAL', 'FIN DE SEMANA', 'INTERCALADO', 'IRREGULAR', 'MIXTO', 'SABATINO', 'SEMIPRESENCIAL', 'SEMIPRESENCIAL (DOS DÍAS A LA SEMANA)', 'SEMIPRESENCIAL (FIN DE SEMANA)', 'SEMIPRESENCIAL (UN DÍA A LA SEMANA)', 'VIRTUAL A DISTANCIA']"
+NIVEL == DIVERSIFICADO,Todos los registros corresponden a NIVEL ESCOLAR: DIVERSIFICADO (alcance del proyecto),PASA,0,Todos los registros son de NIVEL DIVERSIFICADO.
+Categorías duplicadas por diferencias de escritura,Ningún par de valores únicos con similitud >= 0.88 tras normalizar mayúsculas/tildes,FALLA,6,6 pares de valores potencialmente duplicados por escritura.
+'CIUDAD CAPITAL' remapeado,No quedan registros con DEPARTAMENTO == 'CIUDAD CAPITAL',PASA,0,No quedan registros con 'CIUDAD CAPITAL'.
+ESTABLECIMIENTO sin comillas embebidas,"Ningún valor de ESTABLECIMIENTO contiene el carácter """,PASA,0,Sin comillas embebidas en ESTABLECIMIENTO.
+TELEFONO sin letras,Ningún valor de TELEFONO contiene letras,PASA,0,Sin letras en TELEFONO.
+Placeholders de valor faltante convertidos a NA,"Ningún valor en columnas de texto libre coincide con placeholders conocidos ('N/A', 'SIN DATO', etc.)",PASA,0,Todos los placeholders fueron convertidos a NA.
+DISTRITO_FORMATO_ATIPICO consistente con el registro de transformaciones,El conteo de filas marcadas como formato atípico coincide con lo documentado en 02_limpieza.ipynb,PASA,0,"Actual: 70, esperado según registro: 70."
+DEPARTAMENTO en catálogo oficial (22 departamentos),DEPARTAMENTO.isin(CATALOGO_DEPARTAMENTOS) para todas las filas,PASA,0,Todos los DEPARTAMENTO pertenecen al catálogo oficial.
+Formato de CODIGO,CODIGO coincide con ^\d{2}-\d{2}-\d{4}-\d{2}$,PASA,0,Todos los CODIGO cumplen el formato esperado.
+Dominio acotado de NIVEL,NIVEL tiene un número reducido y estable de categorías (variable categórica),PASA,0,NIVEL tiene 1 categorías únicas: ['DIVERSIFICADO']
+Dominio acotado de SECTOR,SECTOR tiene un número reducido y estable de categorías (variable categórica),PASA,0,"SECTOR tiene 4 categorías únicas: ['COOPERATIVA', 'MUNICIPAL', 'OFICIAL', 'PRIVADO']"
+Dominio acotado de AREA,AREA tiene un número reducido y estable de categorías (variable categórica),PASA,0,"AREA tiene 3 categorías únicas: ['RURAL', 'SIN ESPECIFICAR', 'URBANA']"
+Dominio acotado de STATUS,STATUS tiene un número reducido y estable de categorías (variable categórica),PASA,0,"STATUS tiene 5 categorías únicas: ['ABIERTA', 'CERRADA DEFINITIVAMENTE', 'CERRADA TEMPORALMENTE', 'TEMPORAL NOMBRAMIENTO', 'TEMPORAL TITULOS']"
+Dominio acotado de MODALIDAD,MODALIDAD tiene un número reducido y estable de categorías (variable categórica),PASA,0,"MODALIDAD tiene 2 categorías únicas: ['BILINGUE', 'MONOLINGUE']"
+Dominio acotado de JORNADA,JORNADA tiene un número reducido y estable de categorías (variable categórica),PASA,0,"JORNADA tiene 6 categorías únicas: ['DOBLE', 'INTERMEDIA', 'MATUTINA', 'NOCTURNA', 'SIN JORNADA', 'VESPERTINA']"
+Dominio acotado de PLAN,PLAN tiene un número reducido y estable de categorías (variable categórica),PASA,0,"PLAN tiene 13 categorías únicas: ['A DISTANCIA', 'DIARIO(REGULAR)', 'DOMINICAL', 'FIN DE SEMANA', 'INTERCALADO', 'IRREGULAR', 'MIXTO', 'SABATINO', 'SEMIPRESENCIAL', 'SEMIPRESENCIAL (DOS DÍAS A LA SEMANA)', 'SEMIPRESENCIAL (FIN DE SEMANA)', 'SEMIPRESENCIAL (UN DÍA A LA SEMANA)', 'VIRTUAL A DISTANCIA']"
+NIVEL == DIVERSIFICADO,Todos los registros corresponden a NIVEL ESCOLAR: DIVERSIFICADO (alcance del proyecto),PASA,0,Todos los registros son de NIVEL DIVERSIFICADO.
+Categorías duplicadas por diferencias de escritura,Ningún par de valores únicos con similitud >= 0.88 tras normalizar mayúsculas/tildes,FALLA,6,6 pares de valores potencialmente duplicados por escritura.
+'CIUDAD CAPITAL' remapeado,No quedan registros con DEPARTAMENTO == 'CIUDAD CAPITAL',PASA,0,No quedan registros con 'CIUDAD CAPITAL'.
+ESTABLECIMIENTO sin comillas embebidas,"Ningún valor de ESTABLECIMIENTO contiene el carácter """,PASA,0,Sin comillas embebidas en ESTABLECIMIENTO.
+TELEFONO sin letras,Ningún valor de TELEFONO contiene letras,PASA,0,Sin letras en TELEFONO.
+Placeholders de valor faltante convertidos a NA,"Ningún valor en columnas de texto libre coincide con placeholders conocidos ('N/A', 'SIN DATO', etc.)",PASA,0,Todos los placeholders fueron convertidos a NA.
+DISTRITO_FORMATO_ATIPICO consistente con el registro de transformaciones,El conteo de filas marcadas como formato atípico coincide con lo documentado en 02_limpieza.ipynb,PASA,0,"Actual: 70, esperado según registro: 70."
