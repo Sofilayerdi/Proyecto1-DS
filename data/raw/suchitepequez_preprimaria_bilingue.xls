@@ -1,0 +1,577 @@
+<script>alert('Ocurrió un error!\n Control '_ctl0_ContentPlaceHolder1_grvHistorial' of type 'GridView' must be placed inside a form tag with runat=server.')</script>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Búsqueda de centros educativos autorizados por el Mineduc
+</title>
+     <script type = "text/javascript" language ="javascript"  >
+         function Moneda(evt) {
+             //var nav4 = window.event ? true : false;
+             var key = window.event.keyCode;
+             return (key <= 13 || (key >= 48 && key <= 57) || key == 46);
+         }
+
+         function soloNumeros(evt) {
+             // var nav4 = window.event ? true : false;
+             var key = window.event.keyCode;
+             // alert("Has pulsado una tecla " + String(key));
+             return (key <= 13 || (key >= 48 && key <= 57));
+         }
+
+         function soloLetras(evt) {
+             //var nav4 = window.event ? true : false;
+             var key = window.event.keyCode;
+             return (key <= 13 || (key >= 65 && key <= 90) || (key >= 97 && key <= 122));
+
+         }
+
+         function AlphaNumeric(evt) {
+             //var nav4 = window.event ? true : false;
+             var key = window.event.keyCode;
+             return (key <= 13 || key <= 44 || key <= 45 || key <= 46 || key <= 95 || key <= 32 || key <= 34 || (key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122) || key == 241 || key == 209 || key == 193 || key == 201 || key == 205 || key == 211 || key == 218);
+         }
+
+         function PruebaTeclado() {
+             var key = window.event.keyCode; //codigo de tecla.
+             // alert("Has pulsado una tecla");
+             switch (key) {
+                 //case 112: window.location="www.url_para_F1.com"; break;  
+                 case 113:
+                     //alert('F2 presionado');
+                     var Argumentos = '';
+                     var ran = Math.random() * 4;
+                     var ConfiguracionPagina = 'center:yes;resizable:no;help:no;status:no;dialogWidth:750px;dialogHeight:450px';
+                     var Pagina = 'Busqueda.aspx?rn=' + ran;
+                     Argumentos = window.showModalDialog(Pagina, Argumentos, ConfiguracionPagina);
+                     //        if(Argumentos == null)
+                     //        { // mandamos un mensaje
+                     //            window.alert('No se devolvio ninguna valor!');
+                     //        }
+                     //        else
+                     //        { //quiere decir que se ha devuelto una lista de contactos
+                     //            // asi que recuperamos la informacion enviada
+                     //            document.getElementById('txtCodRegreso').value = Argumentos;
+                     //            //document.getElementById('TextBox2').value = Argumentos[1];
+                     //        }
+                     //        window.open("Busqueda.aspx","Busqueda","width=750,height=450,toolbar=no,location=no,directories=no,status=no,menubar=no, scrollbars=yes,resizable=yes,copyhistory=no");
+                     form1.btnAgregarRamEns.click();
+                     //form1.Button1.click();
+
+                     break;
+                 //case 113: window.location="www.url_para_F2.com"; break;  
+                 //case 114: window.location="www.url_para_F3.com"; break;  
+                 //etc, etc...  
+             }
+             return false;
+         }
+
+         
+         function CallPrint(strid) {
+             var prtContent = document.getElementById('_ctl0_ContentPlaceHolder1_reporte');
+             var WinPrint = window.open('', '', 'letf=100,top=100,width=1,height=1,toolbar=0,scrollbars=0,status=0');             
+             WinPrint.document.write(prtContent.innerHTML);
+             WinPrint.document.close();
+             WinPrint.focus();
+             WinPrint.print();
+             WinPrint.close();
+         }
+
+
+
+</script>
+
+    
+    <link href="https://portal.mineduc.gob.gt/uide/tema/tema.css" type="text/css" rel="stylesheet" />	
+    <script type="text/javascript" src="https://portal.mineduc.gob.gt/uide/tema/tema.js"></script>
+
+<style type="text/css" media="print">
+.nover {display:none}
+</style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9T9RDYGCX9"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-9T9RDYGCX9'); </script>
+
+</head>
+<body >
+    <form name="aspnetForm" method="post" action="./" id="aspnetForm">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTk4NjAyODgxMQ9kFgJmD2QWAgIDD2QWBgINDw8WAh4EVGV4dAVaQsO6c3F1ZWRhIGRlIGNlbnRyb3MgZWR1Y2F0aXZvcyBhdXRvcml6YWRvcyBwb3IgZWwgTWluZWR1YyB5IGNhcnJlcmFzIHF1ZSBwdWVkZW4gaW1wYXJ0aXIuZGQCFw9kFggCAQ8QZGQWAQIVZAIDDxAPFgYeDkRhdGFWYWx1ZUZpZWxkBQ1DT0RfTVVOSUNJUElPHg1EYXRhVGV4dEZpZWxkBQ1OT01fTVVOSUNJUElPHgtfIURhdGFCb3VuZGdkEBUWBVRPRE9TCENISUNBQ0FPC0NVWU9URU5BTkdPC01BWkFURU5BTkdPB1BBVFVMVUwMUFVFQkxPIE5VRVZPCVJJTyBCUkFWTwdTQU1BWUFDGVNBTiBBTlRPTklPIFNVQ0hJVEVQRVFVRVoOU0FOIEJFUk5BUkRJTk8YU0FOIEZSQU5DSVNDTyBaQVBPVElUTEFOC1NBTiBHQUJSSUVMEVNBTiBKT1NFIEVMIElET0xPE1NBTiBKT1NFIExBIE1BUVVJTkERU0FOIEpVQU4gQkFVVElTVEELU0FOIExPUkVOWk8QU0FOIE1JR1VFTCBQQU5BTRNTQU4gUEFCTE8gSk9DT1BJTEFTDVNBTlRBIEJBUkJBUkEbU0FOVE8gRE9NSU5HTyBTVUNISVRFUEVRVUVaFFNBTlRPIFRPTUFTIExBIFVOSU9OCFpVTklMSVRPFRYFVE9ET1MCMTMCMDICMDECMTQCMTkCMjACMDgCMTACMDQCMDMCMTICMDUCMjECMTYCMDcCMTECMDkCMTUCMDYCMTcCMTgUKwMWZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2RkAhkPZBYIAgEPFCsACw8WCh4IRGF0YUtleXMWAB4LXyFJdGVtQ291bnQCGx4JUGFnZUNvdW50AgEeFV8hRGF0YVNvdXJjZUl0ZW1Db3VudAIbHgdWaXNpYmxlZ2QUKwABPCsABAEAFgIfCGhkZGRkZGRkZBQrABE8KwAEAQAWCB4KSGVhZGVyVGV4dAUGQ09ESUdPHglEYXRhRmllbGQFBkNPRElHTx4OU29ydEV4cHJlc3Npb24FBkNPRElHTx4IUmVhZE9ubHloPCsABAEAFggfCQUIRElTVFJJVE8fCgUIRElTVFJJVE8fCwUIRElTVFJJVE8fDGg8KwAEAQAWCB8JBQxERVBBUlRBTUVOVE8fCgUMREVQQVJUQU1FTlRPHwsFDERFUEFSVEFNRU5UTx8MaDwrAAQBABYIHwkFCU1VTklDSVBJTx8KBQlNVU5JQ0lQSU8fCwUJTVVOSUNJUElPHwxoPCsABAEAFggfCQUPRVNUQUJMRUNJTUlFTlRPHwoFD0VTVEFCTEVDSU1JRU5UTx8LBQ9FU1RBQkxFQ0lNSUVOVE8fDGg8KwAEAQAWCB8JBQlESVJFQ0NJT04fCgUJRElSRUNDSU9OHwsFCURJUkVDQ0lPTh8MaDwrAAQBABYIHwkFCFRFTEVGT05PHwoFCFRFTEVGT05PHwsFCFRFTEVGT05PHwxoPCsABAEAFggfCQUKU1VQRVJWSVNPUh8KBQpTVVBFUlZJU09SHwsFClNVUEVSVklTT1IfDGg8KwAEAQAWCB8JBQhESVJFQ1RPUh8KBQhESVJFQ1RPUh8LBQhESVJFQ1RPUh8MaDwrAAQBABYIHwkFBU5JVkVMHwoFBU5JVkVMHwsFBU5JVkVMHwxoPCsABAEAFggfCQUGU0VDVE9SHwoFBlNFQ1RPUh8LBQZTRUNUT1IfDGg8KwAEAQAWCB8JBQRBUkVBHwoFBEFSRUEfCwUEQVJFQR8MaDwrAAQBABYIHwkFBlNUQVRVUx8KBQZTVEFUVVMfCwUGU1RBVFVTHwxoPCsABAEAFggfCQUJTU9EQUxJREFEHwoFCU1PREFMSURBRB8LBQlNT0RBTElEQUQfDGg8KwAEAQAWCB8JBQdKT1JOQURBHwoFB0pPUk5BREEfCwUHSk9STkFEQR8MaDwrAAQBABYIHwkFBFBMQU4fCgUEUExBTh8LBQRQTEFOHwxoPCsABAEAFggfCQUNREVQQVJUQU1FTlRBTB8KBQ1ERVBBUlRBTUVOVEFMHwsFDURFUEFSVEFNRU5UQUwfDGgWAmYPDxYUHgxDYXB0aW9uQWxpZ24LKitTeXN0ZW0uV2ViLlVJLldlYkNvbnRyb2xzLlRhYmxlQ2FwdGlvbkFsaWduAB4HQ2FwdGlvbmUeCUdyaWRMaW5lcwsqI1N5c3RlbS5XZWIuVUkuV2ViQ29udHJvbHMuR3JpZExpbmVzAx4LQ2VsbFNwYWNpbmdmHgVXaWR0aBsAAAAAAABZQAcA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BQVSVVJBTGRkAg0PDxYCHwAFF0NFUlJBREEgREVGSU5JVElWQU1FTlRFZGQCDg8PFgIfAAUIQklMSU5HVUVkZAIPDw8WAh8ABQhNQVRVVElOQWRkAhAPDxYCHwAFD0RJQVJJTyhSRUdVTEFSKWRkAhEPDxYCHwAFDlNVQ0hJVEVQw4lRVUVaZGQCHA8PFgQfFwpMHxUCCGQWAmYPDxYCHwhoZGQCBQ88KwARAQwUKwAAZAIHDzwrABEBDBQrAABkAgkPDxYCHwAFHzI3IEVzdGFibGVjaW1pZW50b3MgZW5jb250cmFkb3NkZAIbDw8WAh8IZ2RkAhsPDxYCHwAFBTIsMDEyZGQYAwUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgMFJ19jdGwwOkNvbnRlbnRQbGFjZUhvbGRlcjE6SWJ0bkNvbnN1bHRhcgUkX2N0bDA6Q29udGVudFBsYWNlSG9sZGVyMTpidG5MaW1waWFyBSVfY3RsMDpDb250ZW50UGxhY2VIb2xkZXIxOmJ0bkV4cG9ydGFyBSZfY3RsMDpDb250ZW50UGxhY2VIb2xkZXIxOmdydkhpc3RvcmlhbA9nZAUkX2N0bDA6Q29udGVudFBsYWNlSG9sZGVyMTpEZ0NhcnJlcmFzD2dk2OUDTGSKRZHg9rCrDS/nJg+YcfsRsXhJEDEt+vbfQto=" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+
+<script type="text/javascript">
+<!--
+var __cultureInfo = {"name":"es-GT","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":".","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":",","CurrencySymbol":"Q","NaNSymbol":"NaN","CurrencyNegativePattern":1,"NumberNegativePattern":1,"PercentPositivePattern":0,"PercentNegativePattern":0,"NegativeInfinitySymbol":"-?","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":".","NumberGroupSeparator":",","CurrencyPositivePattern":0,"PositiveInfinitySymbol":"?","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":".","PercentGroupSeparator":",","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"a. m.","Calendar":{"MinSupportedDateTime":"\/Date(-62135575200000)\/","MaxSupportedDateTime":"\/Date(253402300799999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2049,"IsReadOnly":true},"DateSeparator":"/","FirstDayOfWeek":0,"CalendarWeekRule":0,"FullDateTimePattern":"dddd, d \u0027de\u0027 MMMM \u0027de\u0027 yyyy HH:mm:ss","LongDatePattern":"dddd, d \u0027de\u0027 MMMM \u0027de\u0027 yyyy","LongTimePattern":"HH:mm:ss","MonthDayPattern":"d \u0027de\u0027 MMMM","PMDesignator":"p. m.","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"dd/MM/yyyy","ShortTimePattern":"HH:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM \u0027de\u0027 yyyy","AbbreviatedDayNames":["dom.","lun.","mar.","mié.","jue.","vie.","sáb."],"ShortestDayNames":["DO","LU","MA","MI","JU","VI","SA"],"DayNames":["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],"AbbreviatedMonthNames":["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic.",""],"MonthNames":["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""],"IsReadOnly":true,"NativeCalendarName":"calendario gregoriano","AbbreviatedMonthGenitiveNames":["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic.",""],"MonthGenitiveNames":["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""]},"eras":[1,"d. C.",null,0]};// -->
+</script>
+
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=9g05oJRStBfd8IqakoEeJAHfqa5LXLsl4Y9mM_UQhKF8-Rvj6JS4ZaSlo1s-VrHqwoToaydwYb8EkMacER1Fq8ISicsSQQvdcSG0YgB6rwVohZ2cMcy7-0biqa2hjoj08ZX5ZRKpzhFkhEedeKA2Yg2&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=tjoxaemQ-ISpnqOcP6i5Iwj8qOnto9u5cztRHrc-sSROrg92Q57kclscVnE5w_ddWQP3COeZTSykhpykdINvSsZMpgXAMUX-53unl7LG3yRfq_M34V4Fvitxg0TAvQ9TImHUGGMz35bWak3Q3GUu6g2&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=pX7sOae3c4-poZFsrbL9DbTit189gWZ5jGWwpQCBnNwFukiFJL4ILVnubrwFoUDhWxUs4xtItN9PzCDCdfb0ZhvztCEknK4i6fd6H5EhS3uKb3dNohrvIDp6KAgGebXtZ4Cc9JuhXEFZlteuF2yK6g2&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=08Ph--U_jdQ7mAF4nXp264lT1WUs2CwVGMGprF1RfiG7DraB6azQ5iRUKDXTAK6zb38v5KnfiSx_1--gPlXRwKOZ4W-6_a0HRfU3_EIeLTVBIq_tvlUwdPgeUUbR41aeN9yzpyWebQGGJLX6zCU6gJXJOyhNCifsgugRn5A2B4o1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=N5X5yfphdHREbU6WzHmWNZ2EblOUxMCLE5XimFOb1rOmMLblR7vKvVR2Bds2LtM9viiRLGNVquRt9uc9C6ZFzn8HV1a8IwR1pHtEEI6AsVGD9oYTsPFHKqbPcvmQtzt9fB9fxPO5JtF6Q3zHY7Jdug2&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=GkIgDl321FP4Qq21gLwDVlQQgfIPC5PiWbtwQtB0pvOh-iiSk5D7u-ZvgFshprB5_RTTCVuS_05n5Au301Hx45xAVfOK39nZ-uGPRyuQruYGpxjAdjp1Yxhfc7eQ3jw_tSrLI0EuBaGd8PyOj4WItMqcNkt3u982-e5GcDZ8VNI1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=2tx2wS56N5OwcKKejH7ITo5-1jOED5rZet-dC5rZGj4MZBkN6aza2dzL0bKcjvmy0Fs3zX-9eIdoRJBBNLlWbPDs0YgtROIVRIumIbsEwmSk2psArwu12tCUvxqlqykhaQa_S1jiwu_pW6iwMvCS4Iy70ziNgJZZ_LAGumUxWxQ1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=dN69Q20nAIi5icYkOqpO7x9xMZSfSHmugLdQSFv3q_jjhiZUo4mNP1NF5GYu-TA_RKcxwU01kQRheNBn0kx4UYzeKT7f8BWd-RzagBpGTCkW8k4DS-28n6JXfhWJc3xmMgAB9rmw3L4sOFNOeajBh70RxQsBLBGDO7rm0QLeKTQ1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=HmpDuloiIVoaKecZewELXkGB_BePVB5XBHILn9rZe2yPE3SXebj0X2U4lfU_YsO3ejRmMFtAuna9V_YWSS41AE1DRWRhvEHXlMJGggjgnPIpwV7dgs0wIcFhinT8RkK7UyWNBMop2Ek2hjZBQZLOw5hkzH41wKAxe96krUpSaBs1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=IMUh5R-9bvDdrtD9XBLAujz7XWHcrXJ5OgQgPpb_KV0KpuK_3OMj1e_DR9916Ckyt0FojxMiSvLk4N3kR8lE-ed9bbVJhOx4EBaFqAaRyEJnB6FRRoL0TXRcKfYrJ8UThdVFOrHbICR2GhgMJbwuzg2&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=RzZBGTm845ZNRUL_TFOuGx3vVVAhGd3VPaiE_W_zNpVLhJYo0cQ10QBBdNWasJCt5NP3F_Z4Fp2XnfoW-IphdMWkQA8GmxV2rXzEF63jm87NxE3B40gBSiSlsSTR42xJz_n0QDMjSuusGljJZ5KK2WvmTvCsT8ZI9nYB3pJvqCQ1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<script src="/BUSCAESTABLECIMIENTO_GE/ScriptResource.axd?d=83oYlu3qXGLJlepiaeI-RULMdeZLZd6FXbKrPW75holldGvqwHMK5WtFTuD-3h4KOIj1zJerAQUlxcsnhY39qndo4ZOxMsPv6K2VaeC6cOrYgFnhB5d_UkWiyF6FCJgXpivBilhDBk7LmiFmo_zExGAZrMje9nkO3Yo1PceCXIw1&amp;t=ffffffffe4ec58b9" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="EDAC6F9D" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAFMnYYCDkQVrCVmAQHvY1kU9xS+F02QgUoZqCT1W+yt73FPdIl/LN2yDAmx8LeznKf6YF3s0FgSUd7U/8WLAU/Z9Qb7wntL3a8MFuMcS5JLdE71trkNdIwUnukHfuPWgvtIcO/ZSnA/Fp8hVeTcX8VRgwgjc1F+ukaGBndD0+0pr1qDiFITDKZOvwwJlX3U4ElY3rbI8LIWAnSkZ3qDl0tZXY92eRzlvcS6bjOpZxSQb9KjuoAnh8Ag4pzsyyK1qEqM+4FShf0SGPpJwPSiR5gby2uvv7pAuFHezIR5cD8OzhmdBwuSbIOKKt4Uasn/fdzvmaYYMNAYfofy8uU4KkqttlzlFt/fA7xZa2AvF+xP6s0WKD4JAQhERUjij2axAYU9n4X4JBwf4qp+Mx1/NKhPPa6TQGMV1AueeVZivr/zmnMXUA2Gh6RjlBKCxqR0tksHp1A192tO3kLXeuu9isVdAMXvWpUub9rwtQv2XMwF/rBQG3K2GN17fd/lEiFABjIBUQpMBSR6Tlq7vjrmm1s+wiXdbFLyILjw9gFrdqH0qt65zk3u8Y1ZYY3kSNTK1obeBg9u++c7xNdexgx+ETAUSMMNY+538syd84DxqfbQrcdwG8N6w+xv+KqJ3wWhSgLqZb6YlwpVdBG0UvGT/t56zxjXBStG/B7fkA5m/4/7tpTLM1N+dNdHSQSwF6TkUGXnt7HuAJamFXNn28kDt69aVFg8+kGrV1sodxNcm7uYfKcsgJU2LW6K2ZnA5C8p3QGxEynC8tfaVi+zJvDqw3s2yBEwnQgO97fhiVyWSiqarf8dX7UD2gfWrc+5S9wQKIkbKILLpsN2ymPkzv22ZZ714D+UzGFWaRKbJyaRXz1NaVRhFoJ+CTU1Mrq47erZzpCBn6C2NWDQVV+rr4IR8uLr6Pax+ttVhPUi77rrUi2gK+nBAPv8NfmLR2EnVa4B9p8RFgEo85b8uBloebohnA4AUYNR5gO60yfJu/Pq0gtzGTP9XFoC/rT4xPsUU6LZL1P7VZ9oErY80VYf5Ano9IBAxXGGLkNm0X3fSCeJnz0zvgOTBwwQfkRPrCG5/FOwi5v1JTT2Qhb1cVjeFxlZofvg8um3FjJ9MBxa4/Tnfpg2qum1nAcm8Kwk9rb/qbnexbw9tvClkshON2zpGGFpc1Sb43KJcVVt4Pp1gxnt1z8f7nkDwJ6JcGNVWXlfFM9TRPyBZ6d5WZLFndtXCZOqyLgcY8Ssb8L/QJbsb73rYYm1sM75jFQqkjmM3bOH1PhXaN7dY9PXYYIdJZxTK1SXBnJt9rEpO5X7gAdMn1N2T6S/Hjj28ySm83D0K/IpPnu9RiMYj48lcWXZxgQwYdcj4BUcU2SyL3a33QQ6nefhITcB9nBbVLnHfTyqya9/KFSaLnUJk3eTt3IYW0y6nMyC2B5PKPrYq241GPccjvAPEXReD6GOoZlsVW2J149tNqOQUQcoYBpjNnv+JOF6RTHb7RJIf6tLR/wMPtmkrqLv83WYOtmztmUFCNG52jezTZ69hq/ycpgowEG/XVSsNfTYWtuXVu1QdnJi6RUDEFCUBJbKv5KcDjVDaHHvdT1CU3KtvulD5BZZLjotEvgiOTp7qXHF1UuXEYFeMIzJq5Niql/dv8fq5OlRSAX7GvwMHcRcLQZ9skOw8M+hqgzT5GXfV6zCpEQOELmAO6oDeXtZlABEDa3muEXH/O1HXUlo2Vp1W39VQ2j4uBIG0hVoEhM4pc3JBeoYa9Z51+oB7PV/ZUHsod/+/7UVTZEBHRery7QqzOZ3CmRFDNJnis8TCM8fC4lSz" />
+    
+       <table width="99%" border="0" cellspacing="0" cellpadding="0" align="center">
+   		<tr class="Plt_idRow">
+			<td rowspan="4" valign="bottom" class="Plt_cellMineducLogo"></td>
+			<td align="right" colspan="3">
+				<span class="Plt_id">
+                	<span id="_ctl0_lblNombreUsuario"></span>
+                </span>
+				&nbsp;
+				<span class="Plt_subIdGroup">
+					[
+				</span>
+				<span class="Plt_subId">
+                	<span id="_ctl0_lblUsuario"></span>
+                	<span id="_ctl0_lblDirectorioAplicaciones" class="Plt_enlace">e-Servicios</span>
+				</span>
+                <span class="Plt_subIdGroup">
+					]
+				</span>
+				&nbsp;				
+				<span id="_ctl0_lblUnidadUsuario" class="Plt_subUnidad"></span>				
+								
+            </td>
+		</tr>
+		<tr class="Plt_titleRow">
+			<td class="Plt_mainTitle">
+                <span id="_ctl0_lblNomSistema">Búsqueda de centros educativos autorizados por el Mineduc y carreras que pueden impartir.</span>
+</td>			
+			<td rowspan="2">
+				<table align="right">
+					<tr>
+						<td><image class="AMinus" border="0"/></td>
+						<td><image class="ANormal" border="0"/></td>
+						<td><image class="APlus" border="0"/></td>
+						<td><image class="APrint" border="0"/></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr class="Plt_subtitleRow">
+			<td class="Plt_subTitle">
+                <span id="_ctl0_lblNomUnidadEncargada"></span>
+            </td>			
+		</tr>
+		<tr>
+			<td colspan="3">
+				<table cellspacing="0" cellpadding="0" border="0" width="100%">
+					<tr>						
+						<td id="_ctl0_tdCeldaMenu" class="menuCtr">
+							<ul class="menu">
+								<li class="top"><a href="#" class="top_link"><span></span></a>
+								</li>
+							</ul>
+						</td>
+
+						<td width="26px" class="menuDer">
+						</td>
+						<td width="36px">
+							<img id="_ctl0_imgAyuda" class="helpButton" border="0" />
+						</td>
+					</tr>
+				</table>								
+			</td>			
+		</tr>
+   </table>
+  <table width="99%" border="0" align="center">
+  <tr>
+    <td colspan="3">		
+	  <div id="appArea" class="Plt_applicationArea">
+	  <div> 
+	  <span class="Plt_breadcrumbsText">
+          <span id="_ctl0_lblNavegacionSistema"></span>
+      </span>   
+      </div>
+	  <div>
+            
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    <table id="Table1" cellspacing="0" cellpadding="0" width="776" border="0"
+        align="center">
+
+        <!--	<TR>
+						<TD align="center" colSpan="2"><IMG height="30" alt="" src="images/sedo_head.gif" width="776" border="0">
+						</TD>
+					</TR>   -->
+     <tr>
+        <td>
+            Importante:
+         <ul>
+            <li>Para una mejor búsqueda puede seleccionar el departamento y municipio, con base a la ubicación del centro educativo, ingresando el código del establecimiento separado por guiones o el nombre completo o parte de él.</li>
+            <li>Un centro educativo puede contar con uno o más códigos de acuerdo con los servicios educativos autorizados (nivel, plan o jornada).</li>
+            <li>Las carreras pueden visualizarse únicamente en los códigos de centros educativos que tienen autorizado el Nivel de Educación Media, Ciclo de Educación Diversificada.</li>
+            <li>Para visualizar las carreras autorizadas a un centro educativo seleccione el Nivel Escolar: Diversificado.</li>
+         </ul>  
+        </td>
+     </tr>
+    </table>
+    <table id="Table2" cellspacing="0" cellpadding="0" width="776" align="center" border="0">
+        <tr>
+            <td align="center">
+                <h1>&nbsp;</h1>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table id="Table3" style="width: 299px; height: 64px" bordercolor="#00428b" height="64"
+                    cellspacing="0" cellpadding="0" width="299" align="center" bgcolor="#ffffff" border="NotSet">
+                    <tr>
+                        <td>
+                            <table id="Table5" width="100%" align="center" border="0">
+                                <tr>
+                                    <td align="center" bgcolor="#f5f5f5">Departamento</td>
+                                    <td align="center" bgcolor="#f5f5f5">Municipio</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" bgcolor="#f5f5f5">
+                                        <select name="_ctl0:ContentPlaceHolder1:cmbDepartamento" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;_ctl0$ContentPlaceHolder1$cmbDepartamento\&#39;,\&#39;\&#39;)&#39;, 0)" language="javascript" id="_ctl0_ContentPlaceHolder1_cmbDepartamento" onfocus="proximoCampo=&#39;cmbMunicipio&#39;;">
+	<option value="SELECCIONE UNO">SELECCIONE UNO</option>
+	<option value="16">ALTA VERAPAZ</option>
+	<option value="15">BAJA VERAPAZ</option>
+	<option value="04">CHIMALTENANGO</option>
+	<option value="20">CHIQUIMULA</option>
+	<option value="00">CIUDAD CAPITAL</option>
+	<option value="02">EL PROGRESO</option>
+	<option value="05">ESCUINTLA</option>
+	<option value="01">GUATEMALA</option>
+	<option value="13">HUEHUETENANGO</option>
+	<option value="18">IZABAL</option>
+	<option value="21">JALAPA</option>
+	<option value="22">JUTIAPA</option>
+	<option value="17">PETEN</option>
+	<option value="09">QUETZALTENANGO</option>
+	<option value="14">QUICHE</option>
+	<option value="11">RETALHULEU</option>
+	<option value="03">SACATEPEQUEZ</option>
+	<option value="12">SAN MARCOS</option>
+	<option value="06">SANTA ROSA</option>
+	<option value="07">SOLOLA</option>
+	<option selected="selected" value="10">SUCHITEPEQUEZ</option>
+	<option value="08">TOTONICAPAN</option>
+	<option value="19">ZACAPA</option>
+
+</select></td>
+                                    <td align="center" bgcolor="#f5f5f5">
+                                        <select name="_ctl0:ContentPlaceHolder1:cmbMunicipio" id="_ctl0_ContentPlaceHolder1_cmbMunicipio" onfocus="proximoCampo=&#39;cmbNivel&#39;;">
+	<option selected="selected" value="TODOS">TODOS</option>
+	<option value="13">CHICACAO</option>
+	<option value="02">CUYOTENANGO</option>
+	<option value="01">MAZATENANGO</option>
+	<option value="14">PATULUL</option>
+	<option value="19">PUEBLO NUEVO</option>
+	<option value="20">RIO BRAVO</option>
+	<option value="08">SAMAYAC</option>
+	<option value="10">SAN ANTONIO SUCHITEPEQUEZ</option>
+	<option value="04">SAN BERNARDINO</option>
+	<option value="03">SAN FRANCISCO ZAPOTITLAN</option>
+	<option value="12">SAN GABRIEL</option>
+	<option value="05">SAN JOSE EL IDOLO</option>
+	<option value="21">SAN JOSE LA MAQUINA</option>
+	<option value="16">SAN JUAN BAUTISTA</option>
+	<option value="07">SAN LORENZO</option>
+	<option value="11">SAN MIGUEL PANAM</option>
+	<option value="09">SAN PABLO JOCOPILAS</option>
+	<option value="15">SANTA BARBARA</option>
+	<option value="06">SANTO DOMINGO SUCHITEPEQUEZ</option>
+	<option value="17">SANTO TOMAS LA UNION</option>
+	<option value="18">ZUNILITO</option>
+
+</select></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Nivel Escolar&nbsp;
+													<select name="_ctl0:ContentPlaceHolder1:cmbNivel" id="_ctl0_ContentPlaceHolder1_cmbNivel" onfocus="proximoCampo=&#39;txtCodEstab&#39;;">
+	<option value="TODOS">TODOS</option>
+	<option value="45">BASICO</option>
+	<option value="46">DIVERSIFICADO</option>
+	<option value="42">PARVULOS</option>
+	<option selected="selected" value="41">PREPRIMARIA BILINGUE</option>
+	<option value="43">PRIMARIA</option>
+	<option value="44">PRIMARIA DE ADULTOS</option>
+
+</select></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Sector
+													<select name="_ctl0:ContentPlaceHolder1:cmbSector" id="_ctl0_ContentPlaceHolder1_cmbSector" onfocus="proximoCampo=&#39;txtCodEstab&#39;;">
+	<option selected="selected" value="TODOS">TODOS</option>
+	<option value="21">OFICIAL</option>
+	<option value="22">PRIVADO</option>
+	<option value="23">MUNICIPAL</option>
+	<option value="24">COOPERATIVA</option>
+
+</select></td>
+                                </tr>
+                                <tr>
+                                    <td>Plan
+                                    </td>
+                                    <td>Modalidad
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="_ctl0:ContentPlaceHolder1:ddlplan" id="_ctl0_ContentPlaceHolder1_ddlplan">
+	<option selected="selected" value="TODOS">TODOS</option>
+	<option value="1">DIARIO(REGULAR)</option>
+	<option value="2">SABATINO</option>
+	<option value="3">DOMINICAL</option>
+	<option value="4">FIN DE SEMANA</option>
+	<option value="5">IRREGULAR</option>
+	<option value="6">MIXTO</option>
+	<option value="8">A DISTANCIA</option>
+
+</select>
+                                    </td>
+                                    <td>
+                                        <select name="_ctl0:ContentPlaceHolder1:ddlModalidad" id="_ctl0_ContentPlaceHolder1_ddlModalidad">
+	<option selected="selected" value="TODOS">TODOS</option>
+	<option value="1">MONOLINGUE</option>
+	<option value="2">BILINGUE</option>
+
+</select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="height: 17px" bgcolor="#f5f5f5" colspan="2">Código (##-##-####-##)
+													<input name="_ctl0:ContentPlaceHolder1:txtCodEstab" type="text" maxlength="13" size="13" id="_ctl0_ContentPlaceHolder1_txtCodEstab" style="width:120px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 17px" bgcolor="#f5f5f5" colspan="2">Nombre
+													<input name="_ctl0:ContentPlaceHolder1:txtNomEstab" type="text" id="_ctl0_ContentPlaceHolder1_txtNomEstab" style="width:282px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 17px" bgcolor="#f5f5f5" colspan="2">Dirección
+													<input name="_ctl0:ContentPlaceHolder1:txtDirecEstab" type="text" id="_ctl0_ContentPlaceHolder1_txtDirecEstab" style="width:282px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" bgcolor="#f5f5f5" colspan="2">
+                                        <input type="image" name="_ctl0:ContentPlaceHolder1:IbtnConsultar" id="_ctl0_ContentPlaceHolder1_IbtnConsultar" title="Consulta boleta de docente del código ingresado" src="images\seleccionar_estab.gif" border="0" />&nbsp;&nbsp;
+													<input type="image" name="_ctl0:ContentPlaceHolder1:btnLimpiar" id="_ctl0_ContentPlaceHolder1_btnLimpiar" src="images\limpiar_resultados.gif" border="0" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <br />
+                </td>
+        </tr>
+
+
+    </table>
+    <div id="_ctl0_ContentPlaceHolder1_reporte">
+        <table id="TableResumen" cellspacing="0" cellpadding="0" width="776" align="center" border="0">
+            <tr>
+                <td>
+                    <center>
+                        &nbsp;</center>
+                    <center>
+                        <table cellspacing="0" rules="all" bordercolor="SteelBlue" border="1" id="_ctl0_ContentPlaceHolder1_dgResultado" style="border-color:SteelBlue;font-family:Arial;font-size:Smaller;height:104px;width:100%;border-collapse:collapse;">
+	<tr align="center" valign="middle" style="background-color:LightSteelBlue;">
+		<td>CODIGO</td><td>DISTRITO</td><td>DEPARTAMENTO</td><td>MUNICIPIO</td><td>ESTABLECIMIENTO</td><td>DIRECCION</td><td>TELEFONO</td><td>SUPERVISOR</td><td>DIRECTOR</td><td>NIVEL</td><td>SECTOR</td><td>AREA</td><td>STATUS</td><td>MODALIDAD</td><td>JORNADA</td><td>PLAN</td><td>DEPARTAMENTAL</td>
+	</tr><tr>
+		<td>10-02-0067-41</td><td>10-003</td><td>SUCHITEPEQUEZ</td><td>CUYOTENANGO</td><td>COPB ANEXO A EORM</td><td>COMUNIDAD EL PROGRESO</td><td>78720350</td><td>CARLOS ENRIQUE JALEL DE LOS SANTOS</td><td>----------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-04-0014-41</td><td>10-013</td><td>SUCHITEPEQUEZ</td><td>SAN BERNARDINO</td><td>COPB ANEXO A EORM</td><td>CANTON LAS CRUCES SECTOR 2</td><td>78720350</td><td>JUANA MARIA CIFUENTES PEREZ</td><td>---------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-04-0015-41</td><td>10-013</td><td>SUCHITEPEQUEZ</td><td>SAN BERNARDINO</td><td>COPB ANEXO A EORM</td><td>SECTOR RIO LINDO CANTON EL PROGRESO</td><td>78720350</td><td>JUANA MARIA CIFUENTES PEREZ</td><td>---------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-06-1817-41</td><td>&nbsp;</td><td>SUCHITEPEQUEZ</td><td>SANTO DOMINGO SUCHITEPEQUEZ</td><td>EODP</td><td>CANTON LAS VARITAS</td><td>&nbsp;</td><td> </td><td>&nbsp;</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>CERRADA DEFINITIVAMENTE</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-06-2202-41</td><td>&nbsp;</td><td>SUCHITEPEQUEZ</td><td>SANTO DOMINGO SUCHITEPEQUEZ</td><td>ERBA -PRONADE-ANEXA</td><td>COMUNIDAD AGRARIA NUEVA VICTORIA</td><td>&nbsp;</td><td> </td><td>&nbsp;</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>CERRADA DEFINITIVAMENTE</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-08-0017-41</td><td>10-99-0492</td><td>SUCHITEPEQUEZ</td><td>SAMAYAC</td><td>COPB ANEXO A EORM</td><td>CANTON SAN ANTONIO NIMA I</td><td>57175755</td><td>PAULA ZUCELY QUIBAJÁ PÉREZ DE TELÓN</td><td>LEONARDA  AVILA CHÚN</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-08-0018-41</td><td>10-99-0492</td><td>SUCHITEPEQUEZ</td><td>SAMAYAC</td><td>COPB ANEXO A EORM</td><td>CANTON SAN FRANCISCO PUMA-NIMA</td><td>58521936</td><td>PAULA ZUCELY QUIBAJÁ PÉREZ DE TELÓN</td><td>JORGE MARIO MANCIO CORADO</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-08-0019-41</td><td>10-99-0492</td><td>SUCHITEPEQUEZ</td><td>SAMAYAC</td><td>COPB ANEXO A EOUM NO. 2</td><td>CANTON SANTO DOMINGO</td><td>42174677</td><td>PAULA ZUCELY QUIBAJÁ PÉREZ DE TELÓN</td><td>JORGE RUFINO CACOJ IMERY</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>URBANA</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-09-0016-41</td><td>10-010</td><td>SUCHITEPEQUEZ</td><td>SAN PABLO JOCOPILAS</td><td>COPB ANEXO A EORM</td><td>MICROPARCELAMIENTO LAS PIEDRECITAS</td><td>78720350</td><td>MILDRED JANETH DE LEON MENDEZ DE FUENTES</td><td>---------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-09-0017-41</td><td>10-09-0493</td><td>SUCHITEPEQUEZ</td><td>SAN PABLO JOCOPILAS</td><td>COPB ANEXO A EORM</td><td>SECTOR LA GUARDIANIA Y PACOCO COMUNIDAD AGRARIA CHOCOLA</td><td>47397490</td><td>MILDRED JANETH DE LEÓN MÉNDEZ DE FUENTES</td><td>MÓNICA YULIZA BARRENO OXLAJ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-10-0060-41</td><td>10-10-0495</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>ALDEA NAHUALATE</td><td>58251488</td><td>KARIN MARLENI CHAPETÓN RODRÍGUEZ</td><td>LUISA ALEJANDRA PALACIOS CANIZ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-10-0061-41</td><td>10-10-0495</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>COLONIA SANTA FE</td><td>54823753</td><td>KARIN MARLENI CHAPETÓN RODRÍGUEZ</td><td>WENDY LUCRECIA ARREAGA ALONZO</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-10-0062-41</td><td>10-014</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>ALDEA SAN CARLOS NAHULATE</td><td>78720350</td><td>LILIA OLIMPIA CHAPETON CARDONA</td><td>--------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-10-0063-41</td><td>10-10-0495</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>ALDEA EL TRIUNFO</td><td>47432564</td><td>KARIN MARLENI CHAPETÓN RODRÍGUEZ</td><td>BRISNA ELIZANDE GUZMÁN ALVAREZ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-10-0064-41</td><td>10-10-0495</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>CANTON LA TOMA, ALDEA NAHUALATE</td><td>32158894</td><td>KARIN MARLENI CHAPETÓN RODRÍGUEZ</td><td>CELESTE ALEJANDRINA MARTÍNEZ </td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-10-0065-41</td><td>10-10-0495</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>ALDEA BARRIOS I SECTOR SAN VICENTE</td><td>47529468</td><td>KARIN MARLENI CHAPETÓN RODRÍGUEZ</td><td>EDUARDO RODRIGO MUYUC VÁSQUEZ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-10-0066-41</td><td>10-10-0496</td><td>SUCHITEPEQUEZ</td><td>SAN ANTONIO SUCHITEPEQUEZ</td><td>COPB ANEXO A EORM</td><td>ALDEA BARRIOS I SECTOR IV</td><td>41162313</td><td>MAYNOR RENÉ SAQUIC ESPINOZA</td><td>CLAUDIA ESMERALDA DE LA CRUZ LÓPEZ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-11-0012-41</td><td>10-99-0497</td><td>SUCHITEPEQUEZ</td><td>SAN MIGUEL PANAM</td><td>COPB ANEXO A EORM</td><td>CANTON MONTELLANO</td><td>47302512</td><td>LORENZO CANO VELÁSQUEZ</td><td>EVELIN PAOLA GONZALEZ CARRERA</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-13-0044-41</td><td>10-13-0499</td><td>SUCHITEPEQUEZ</td><td>CHICACAO</td><td>COPB ANEXO A EORM</td><td>CANTON SIETE VUELTAS</td><td>54116227</td><td>ANDREA POP TEBALÁN DE POSPOY</td><td>ELIZABETH  NAVICHOC CUMATZ</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-13-1779-41</td><td>&nbsp;</td><td>SUCHITEPEQUEZ</td><td>CHICACAO</td><td>COPB</td><td>LABOR SAN ANTONIO LAS FLORES</td><td>&nbsp;</td><td> </td><td>&nbsp;</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>CERRADA TEMPORALMENTE</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-13-2280-41</td><td>10-13-0499</td><td>SUCHITEPEQUEZ</td><td>CHICACAO</td><td>COPB ANEXA A EORM</td><td>COMUNIDAD MOCA</td><td>58435152</td><td>ANDREA POP TEBALÁN DE POSPOY</td><td>FRANCISCO EMANUEL TZINÁ SAC</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>ABIERTA</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-14-0045-41</td><td>10-017</td><td>SUCHITEPEQUEZ</td><td>PATULUL</td><td>COPB ANEXO A EORM</td><td>COMUNIDAD SANTA TERESITA</td><td>78720350</td><td>ELMO ROGELIO RODRIGUEZ ORELLANA</td><td>-------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-14-0046-41</td><td>10-017</td><td>SUCHITEPEQUEZ</td><td>PATULUL</td><td>COPB ANEXO A EORM</td><td>CASERIO LA PROVIDENCIA</td><td>78720350</td><td>ELMO ROGELIO RODRIGUEZ ORELLANA</td><td>------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-14-0047-41</td><td>10-017</td><td>SUCHITEPEQUEZ</td><td>PATULUL</td><td>COPB ANEXO A EORM</td><td>COMUNIDAD LAS MARIAS</td><td>78720350</td><td>ELMO ROGELIO RODRIGUEZ ORELLANA</td><td>------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-14-0048-41</td><td>10-017</td><td>SUCHITEPEQUEZ</td><td>PATULUL</td><td>COPB ANEXO A EORM</td><td>ALDEA SAN JOAQUIN SINACA</td><td>78720350</td><td>ELMO ROGELIO RODRIGUEZ ORELLANA</td><td>-------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:LightGoldenrodYellow;">
+		<td>10-15-0034-41</td><td>10-021</td><td>SUCHITEPEQUEZ</td><td>SANTA BARBARA</td><td>COPB ANEXO A EORM</td><td>ALDEA LAS ILUSIONES</td><td>78720350</td><td>TANIA GISEL ESPAÑA DE LEON DE RODRIGUEZ</td><td>------</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>TEMPORAL NOMBRAMIENTO</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr>
+		<td>10-17-2024-41</td><td>&nbsp;</td><td>SUCHITEPEQUEZ</td><td>SANTO TOMAS LA UNION</td><td>COPB ANEXA EORM UN NUEVO DIA</td><td>COMUNIDAD ENTRE RIOS</td><td>&nbsp;</td><td> </td><td>&nbsp;</td><td>PREPRIMARIA BILINGUE</td><td>OFICIAL</td><td>RURAL</td><td>CERRADA DEFINITIVAMENTE</td><td>BILINGUE</td><td>MATUTINA</td><td>DIARIO(REGULAR)</td><td>SUCHITEPÉQUEZ</td>
+	</tr><tr style="background-color:Gold;">
+		<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+	</tr>
+</table>
+                        
+                        <br />                        
+                        
+                        <div>
+
+</div>
+                        <span id="_ctl0_ContentPlaceHolder1_lblPie1" DESIGNTIMEDRAGDROP="417" style="color:#C04000;font-weight:bold;">27 Establecimientos encontrados</span>&nbsp;</center>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <table cellspacing="0" cellpadding="0" width="70%" border="0" align="center">
+        <tr>
+            <td valign="top" align="center">
+                <br>
+                <div id="_ctl0_ContentPlaceHolder1_pnlImpExp" style="height:50px;width:224px;">
+	
+                    <img style="cursor: hand" onclick="CallPrint('reporte')" alt="Imprimir..." src="images/imprimir.gif"><input type="image" name="_ctl0:ContentPlaceHolder1:btnExportar" id="_ctl0_ContentPlaceHolder1_btnExportar" title="Exportar a Excel..." src="images/export_excel.gif" alt="Exportar a Excel" border="0" />
+                
+</div>
+            </td>
+        </tr>
+    </table>
+
+            
+	  </div>
+      <div id="_ctl0_UpdateProgress1" style="display:none;">
+	     
+			<div class="fondoLoading">
+            </div>       
+            <div class="loading">											
+            </div>            
+        
+</div>
+       </div>
+	  </td>
+  </tr>
+   <tr id="footerRow">
+  	<td align="left">
+		<span class="Plt_id">Ministerio de Educación, Copyright &copy; 
+            <span id="_ctl0_lblAnio">2,012</span>
+        </span>
+	</td>
+	<td>
+	</td>
+    <td align="right">
+        <a id="_ctl0_lnkBtnAvisoLegal" class="Plt_footerItem" href="javascript:__doPostBack(&#39;_ctl0$lnkBtnAvisoLegal&#39;,&#39;&#39;)">Aviso Legal</a>
+        
+        <span class="Plt_pipe_footer">|</span>
+        <a id="_ctl0_lnkBtnTerminos" class="Plt_footerItem" href="javascript:__doPostBack(&#39;_ctl0$lnkBtnTerminos&#39;,&#39;&#39;)">Términos y Condiciones</a>
+        
+        <span class="Plt_pipe_footer">|</span>
+        <a id="_ctl0_lnkBtnContacto" class="Plt_footerItem" href="javascript:__doPostBack(&#39;_ctl0$lnkBtnContacto&#39;,&#39;&#39;)">Contacto</a>
+        
+     </td>
+  </tr>
+
+</table>
+    <div id="_ctl0_pnlAvisoLegal" class="dialog centrado">
+	
+    <iframe src="https://portal.mineduc.gob.gt/uide/Modulos/Mensajes/htmAvisoLegal.htm" frameborder="0" width="500" height="400">
+    </iframe>
+    <br /> 
+    <input type="submit" name="_ctl0:btnCerrarAvisoLegal" value="Cerrar Ventana" id="_ctl0_btnCerrarAvisoLegal" />
+    
+</div>   
+   
+    <div id="_ctl0_pnlTerminosCondiciones" class="dialog centrado">
+	
+    <iframe class="Plt_terminos_condiciones" src="https://portal.mineduc.gob.gt/uide/Modulos/Mensajes/htmTerminosCondiciones.htm" frameborder="0" width="775" height="585">	 
+    </iframe>		
+    <br /> 
+    <input type="submit" name="_ctl0:btnCerrarTerminos" value="Cerrar Ventana" id="_ctl0_btnCerrarTerminos" />
+    
+</div>
+
+    <div id="_ctl0_pnlContacto" class="dialog centrado">
+	
+     <iframe class="Plt_contacto" src="https://portal.mineduc.gob.gt/uide/Modulos/Mensajes/htmContacto.htm?EMAIL=info@mineduc.gob.gt&UNIDAD_RESPONSABLE=Dirección General de Acreditación y Certificación -DIGEACE- " frameborder="0" width="300" height="125">
+    </iframe>
+    <br /> 
+    <input type="submit" name="_ctl0:btnCerrarContacto" value="Cerrar Ventana" id="_ctl0_btnCerrarContacto" />
+    
+</div>
+    
+    
+
+<script type="text/javascript">
+<!--
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"fondoModal","CancelControlID":"_ctl0_btnCerrarAvisoLegal","PopupControlID":"_ctl0_pnlAvisoLegal","dynamicServicePath":"/BUSCAESTABLECIMIENTO_GE/wbfBuscar.aspx","id":"_ctl0_lnkBtnAvisoLegal_ModalPopupExtender"}, null, null, $get("_ctl0_lnkBtnAvisoLegal"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"fondoModal","CancelControlID":"_ctl0_btnCerrarTerminos","PopupControlID":"_ctl0_pnlTerminosCondiciones","dynamicServicePath":"/BUSCAESTABLECIMIENTO_GE/wbfBuscar.aspx","id":"_ctl0_lnkBtnTerminos_ModalPopupExtender"}, null, null, $get("_ctl0_lnkBtnTerminos"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"fondoModal","CancelControlID":"_ctl0_btnCerrarContacto","PopupControlID":"_ctl0_pnlContacto","dynamicServicePath":"/BUSCAESTABLECIMIENTO_GE/wbfBuscar.aspx","id":"_ctl0_lnkBtnContacto_ModalPopupExtender"}, null, null, $get("_ctl0_lnkBtnContacto"));
+});
+// -->
+</script>
+</form>
+	<br/>
+	<br/>
+	<br/>
+</body>
+</html>

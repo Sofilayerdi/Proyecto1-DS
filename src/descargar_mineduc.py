@@ -4,8 +4,8 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
-from pathlib import Path
 import time
 from config import *
 from utils import *
@@ -26,77 +26,83 @@ driver = webdriver.Chrome(
     options=options
 )
 
-wait = WebDriverWait(driver,20)
-driver.get(URL)
+wait = WebDriverWait(driver, 20)
 
-for codigo, nombre in DEPARTAMENTOS.items():
-    print(f"Descargando {nombre}...")
-    print("Seleccionando departamento...")
-    time.sleep(2)
+NIVELES = {
+    "45": "basico",
+    "46": "diversificado",
+    "42": "parvulos",
+    "41": "preprimaria_bilingue",
+    "43": "primaria",
+    "44": "primaria_adultos"
+}
 
-    departamento = wait.until(
-        EC.presence_of_element_located(
-            (
-                By.ID,
-                "_ctl0_ContentPlaceHolder1_cmbDepartamento"
-            )
-        )
-    )
-    Select(departamento).select_by_value(codigo)
-    time.sleep(2)
+for codigo_dep, nombre_dep in DEPARTAMENTOS.items():
+    print(nombre_dep.upper())
 
-    print("Esperando municipios...")
+    for codigo_nivel, nombre_nivel in NIVELES.items():
+        print(f"Nivel: {nombre_nivel}")
+        driver.get(URL)
+        try:
+            Select(
+                wait.until(
+                    EC.element_to_be_clickable(
+                        (
+                            By.ID,
+                            "_ctl0_ContentPlaceHolder1_cmbDepartamento"
+                        )
+                    )
+                )
+            ).select_by_value(codigo_dep)
 
-    wait.until(
-        EC.presence_of_element_located(
-            (
-                By.ID,
-                "_ctl0_ContentPlaceHolder1_cmbMunicipio"
-            )
-        )
-    )
-
-    time.sleep(2)
-    print("Seleccionando nivel...")
-    Select(
-        wait.until(
-            EC.element_to_be_clickable(
-                (
-                    By.ID,
-                    "_ctl0_ContentPlaceHolder1_cmbNivel"
+            time.sleep(2)
+            wait.until(
+                EC.presence_of_element_located(
+                    (
+                        By.ID,
+                        "_ctl0_ContentPlaceHolder1_cmbMunicipio"
+                    )
                 )
             )
-        )
-    ).select_by_value("46")
 
-    print("Buscando...")
+            Select(
+                wait.until(
+                    EC.element_to_be_clickable(
+                        (
+                            By.ID,
+                            "_ctl0_ContentPlaceHolder1_cmbNivel"
+                        )
+                    )
+                )
+            ).select_by_value(codigo_nivel)
 
-    driver.find_element(
-        By.ID,
-        "_ctl0_ContentPlaceHolder1_IbtnConsultar"
-    ).click()
-
-    print("Exportando...")
-
-    wait.until(
-        EC.presence_of_element_located(
-            (
+            driver.find_element(
                 By.ID,
-                "_ctl0_ContentPlaceHolder1_btnExportar"
+                "_ctl0_ContentPlaceHolder1_IbtnConsultar"
+            ).click()
+
+            # Esperar Exportar (máximo 5 segundos)
+            exportar = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable(
+                    (
+                        By.ID,
+                        "_ctl0_ContentPlaceHolder1_btnExportar"
+                    )
+                )
             )
-        )
-    )
-    driver.find_element(
-        By.ID,
-        "_ctl0_ContentPlaceHolder1_btnExportar"
-    ).click()
-    archivo = esperar_descarga(DOWNLOAD_FOLDER)
-    renombrar_archivo(
-        archivo,
-        f"{nombre}.xls"
-    )
-    driver.find_element(
-        By.ID,
-        "_ctl0_ContentPlaceHolder1_btnLimpiar"
-    ).click()
+
+            exportar.click()
+            archivo = esperar_descarga(DOWNLOAD_FOLDER)
+            renombrar_archivo(
+                archivo,
+                f"{nombre_dep}_{nombre_nivel}.xls"
+            )
+            print("   ✓ Descargado")
+        except TimeoutException:
+            print("   ⚠ Sin establecimientos")
+        except Exception as e:
+            print(f"   ✗ Error: {e}")
+
 driver.quit()
+
+print("\nProceso terminado.")
